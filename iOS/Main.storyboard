@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vpd-SL-7h0">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fvA-EO-er7">
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="fvA-EO-er7" firstAttribute="top" secondItem="Vpd-SL-7h0" secondAttribute="top" id="ZLN-s4-9qP"/>
+                                    <constraint firstItem="fvA-EO-er7" firstAttribute="leading" secondItem="Vpd-SL-7h0" secondAttribute="leading" id="piF-op-cQB"/>
+                                </constraints>
+                            </scrollView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZVS-Z6-e1n">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="af9-3b-3Da"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem title="Item1" id="nm1-9C-aWw"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="RXo-HL-RBf"/>
+                                    <barButtonItem title="Item2" id="oe6-cP-8Nw"/>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ZVS-Z6-e1n" firstAttribute="top" secondItem="Vpd-SL-7h0" secondAttribute="bottom" id="7BV-VR-FI8"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ZVS-Z6-e1n" secondAttribute="trailing" constant="-20" id="GnX-Lp-LmG"/>
+                            <constraint firstItem="ZVS-Z6-e1n" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottomMargin" id="Meg-MM-veh"/>
+                            <constraint firstItem="ZVS-Z6-e1n" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="dwi-mW-aWR"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Vpd-SL-7h0" secondAttribute="trailing" constant="-20" id="fZR-sV-eLB"/>
+                            <constraint firstItem="Vpd-SL-7h0" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="glG-43-HX7"/>
+                            <constraint firstItem="Vpd-SL-7h0" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="yO2-Hg-jln"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="imageView" destination="fvA-EO-er7" id="FpO-BI-mwv"/>
+                        <outlet property="pdfToolbar" destination="ZVS-Z6-e1n" id="Vn8-YP-zHj"/>
+                        <outlet property="scrollView" destination="Vpd-SL-7h0" id="LU8-ag-oDt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="245" y="316"/>
+        </scene>
+    </scenes>
+</document>
