@@ -72,6 +72,7 @@
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PDFRendereFragment.cs" />
+    <Compile Include="PDFDocument.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -96,6 +97,8 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\goeckner-pres.pdf" />
+    <AndroidAsset Include="Assets\InterViewer.pdf" />
+    <AndroidAsset Include="Assets\0200B9.pdf" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Insights.1.11.2\build\MonoAndroid10\Xamarin.Insights.targets" Condition="Exists('..\packages\Xamarin.Insights.1.11.2\build\MonoAndroid10\Xamarin.Insights.targets')" />

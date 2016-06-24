@@ -1,6 +1,8 @@
 ﻿using System;
 using CoreGraphics;
-		
+using System.Collections.Generic;		
+using System.IO;
+
 using UIKit;
 using Debug = System.Diagnostics.Debug;
 
@@ -27,7 +29,8 @@ namespace PDFToImage.iOS
 		public ViewController (IntPtr handle) : base (handle)
 		{
 			_pageNumber = 1;
-			_pdf = CGPDFDocument.FromFile("/Users/Michael/Documents/Projects/Mono/PDFToImage/iOS/goeckner-pres.pdf");
+			String filename = Path.Combine(NibBundle.ResourcePath, "InterViewer.pdf");
+			_pdf = CGPDFDocument.FromFile(filename);
 		    
 		}
 
@@ -41,9 +44,6 @@ namespace PDFToImage.iOS
 			imageView.Image = GetThumbForPage();
 			scrollView.ContentSize = imageView.Image.Size;
 
-			var thisImageView = new UIImageView();
-			thisImageView.Frame = new CoreGraphics.CGRect(740, 85, 225, 35);
-			scrollView.InsertSubview(thisImageView, 1);
 
 			pdfToolbar.Items[0].Clicked +=	delegate {
 				this.PageNumber--;
@@ -59,63 +59,52 @@ namespace PDFToImage.iOS
 
 		}
 
-		public UIImage GetThumbForPage() {
-			CGPDFPage pdfPage = _pdf.GetPage(PageNumber);
-			CGRect pageRect = pdfPage.GetBoxRect(CGPDFBox.Media);
-			//calculate fram and width scale
-			nfloat scale = this.View.Frame.Width / pageRect.Width;
-			pageRect.Size = new CGSize(pageRect.Width*scale, pageRect.Height *scale);
+		public UIImage GetThumbForPage()
+		{
 
-			//UIGraphics.BeginImageContext(aSize) is for creating graphics contexts at the UIKit level outside of UIView's drawRect: method.
+			CGPDFPage pdfPg = _pdf.GetPage(PageNumber);
+			nfloat scale;
+			CGRect pageRect = pdfPg.GetBoxRect(CGPDFBox.Media);
+			if (pageRect.Height > pageRect.Width)
+			{
+				/*nfloat swithWidth = 0.0f;
+				swithWidth = pageRect.Width;
+				pageRect.Width = pageRect.Height;
+				pageRect.Height = swithWidth;*/
+				scale = this.View.Frame.Width / pageRect.Width;
+			}
+			else {
+				scale = this.View.Frame.Height / pageRect.Height;
+			}
+
+			pageRect.Size = new CGSize(pageRect.Width * scale, pageRect.Height * scale);
+
 			UIGraphics.BeginImageContext(pageRect.Size);
 			CGContext context = UIGraphics.GetCurrentContext();
 
 			context.SetFillColor((nfloat)1.0, (nfloat)1.0, (nfloat)1.0, (nfloat)1.0);
 			context.FillRect(pageRect);
-			//context.ConvertSizeToDeviceSpace(pageRect.Size);
+
 			context.SaveState();
 
-			Debug.WriteLine("getTranslatCTM=" + context.GetCTM());
-			//context.ScaleCTM(50,50);
 			context.TranslateCTM(0, pageRect.Size.Height);
-			Debug.WriteLine("getTranslatCTM=" + context.GetCTM());
-			//context.TranslateCTM(-0.5f*pageRect.Size.Width, -0.5f*pageRect.Size.Height);
-
-			//context.RotateCTM(-(float)Math.PI / 2);
-			Debug.WriteLine("getTranslatCTM=" + context.GetCTM());
-
-
-
-			/*CGContextTranslateCTM(context, 0.5f * size.width, 0.5f * size.height);
-			CGContextRotateCTM(context, radians(90));
-
-            [image drawInRect:(CGRect){ { -size.width * 0.5f, -size.height * 0.5f }, size} ] ;*/
-
 			context.ScaleCTM(1, -1);
+			/*if (pageRect.Width > pageRect.Height)
+			{
+				context.ConcatCTM(pdfPg.GetDrawingTransform(CGPDFBox.Crop, pageRect, 0, true));
+				context.TranslateCTM(-100f, -100f);
+			}*/
 
 			context.ConcatCTM(CGAffineTransform.MakeScale(scale, scale));
 
 
-			context.DrawPDFPage(pdfPage);
-
-
+			context.DrawPDFPage(pdfPg);
 			context.RestoreState();
 
 			UIImage thm = UIGraphics.GetImageFromCurrentImageContext();
-
-			//UIImage.FromImage(thm.CGImage, thm.CurrentScale, UIImageOrientation.Left);
-			//RotateImage(thm, true);
 			UIGraphics.EndImageContext();
 
 			return thm;
-			
-		}
-
-		public void RotateImage(UIImage imageToRotate, bool isCCW)
-		{
-			var imageRotation = isCCW ? UIImageOrientation.Right : UIImageOrientation.Left;
-			imageToRotate = UIImage.FromImage(imageToRotate.CGImage, imageToRotate.CurrentScale, imageRotation);
-	
 		}
 
 		public override void DidRotate(UIInterfaceOrientation fromInterfaceOrientation)

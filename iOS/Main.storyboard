@@ -50,6 +50,8 @@
                             <constraint firstItem="ZVS-Z6-e1n" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="dwi-mW-aWR"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Vpd-SL-7h0" secondAttribute="trailing" constant="-20" id="fZR-sV-eLB"/>
                             <constraint firstItem="Vpd-SL-7h0" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="glG-43-HX7"/>
+                            <constraint firstItem="ZVS-Z6-e1n" firstAttribute="leading" secondItem="Vpd-SL-7h0" secondAttribute="leading" id="jkQ-vG-sAI"/>
+                            <constraint firstItem="ZVS-Z6-e1n" firstAttribute="trailing" secondItem="Vpd-SL-7h0" secondAttribute="trailing" id="ocK-eZ-41x"/>
                             <constraint firstItem="Vpd-SL-7h0" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="yO2-Hg-jln"/>
                         </constraints>
                     </view>
